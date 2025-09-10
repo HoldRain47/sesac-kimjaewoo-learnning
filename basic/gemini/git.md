@@ -69,5 +69,5 @@ Git은 버전 관리 시스템 자체이고, GitHub는 Git으로 관리하는 �
 
 ### 참고 자료
 
-*   **Git 공식 문서:** [https://git-scm.com/doc](https://git-scm.com/doc)
-*   **GitHub 공식 문서:** [https://docs.github.com/](https://docs.github.com/)
+- **Git 공식 문서:** [https://git-scm.com/doc](https://git-scm.com/doc)
+- **GitHub 공식 문서:** [https://docs.github.com/](https://docs.github.com/)
