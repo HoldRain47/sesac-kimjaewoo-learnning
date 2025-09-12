@@ -46,7 +46,7 @@ p {
 /* 자식 선택자 */
 .container > p {
   font-size: 18px;
-  color: blue;
+  color: rgb(50, 142, 79);
 }
 
 /* 후손 선택자 */
