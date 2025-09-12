@@ -1,0 +1,65 @@
+/* 전체 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 태그 선택자 */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+h1 {
+  color: navy;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* 아이디 선택자 */
+#header {
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 클래스 선택자 */
+.highlight {
+  background-color: yellow;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.warning {
+  color: red;
+  border: 2px solid red;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* 자식 선택자 */
+.container > p {
+  font-size: 18px;
+  color: blue;
+}
+
+/* 후손 선택자 */
+.content span {
+  font-style: italic;
+  color: green;
+}
+
+/* 그룹 선택자 */
+h2,
+h3,
+h4 {
+  color: #666;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}

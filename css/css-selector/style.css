@@ -1,0 +1,43 @@
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: blue;
+}
+
+.font-100 {
+  font-size: 100px;
+}
+
+.font-50 {
+  font-size: 50px;
+}
+
+#bold {
+  font-weight: 900;
+}
+
+[href] {
+  text-decoration: none;
+}
+
+div > p {
+  font-size: italic;
+}
+
+#parent > .child {
+  color: violet;
+}
+
+/* 혼합 선택자 */
+p.red {
+ color: lightcoral;
+}
+p.green {
+ color: chartreuse;
+}
