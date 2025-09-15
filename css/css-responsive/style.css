@@ -1,0 +1,17 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+
+@media (max-width: 767px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
