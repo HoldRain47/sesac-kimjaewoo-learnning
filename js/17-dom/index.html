@@ -7,10 +7,38 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
+    <div id="parent"></div>
+    <p></p>
+    <button>버튼</button>
     <script>
       //import axios from "axios";
       //API 사용을 위한 기본주소(URL)
       const DOMAIN_NAME = "https://dummyjson.com";
+      // //기본구조
+      // const parentTag = document.querySelector("#parent");
+      // async function getProducts() {
+      //   const config = { url: `${DOMAIN_NAME}/test`, method: "get" };
+      // }
+
+      //id가 parent인 요소를 선택(querySelector)
+
+      const parentTag = document.querySelector("#parent");
+      //상품 목록을 요청할 비동기(async) 함수
+      async function getProducts() {
+        const config = { url: `${DOMAIN_NAME}/products`, method: "get" };
+        const response = await axios(config);
+
+        const products = response["data"]["products"];
+        //매개변수 : 배열에 저장된 개별 상품 객체
+        products.forEach((product) => {
+          //상품의 이름 속성 추출
+          const title = product["title"];
+          const pTag = document.createElement("p");
+          pTag["textContent"] = title;
+          //#parent 인 요소에 p 태그 추가 (append())
+          parentTag.append(pTag);
+        });
+      }
       async function testConnect() {
         //요청주소와 요청방법
         const config = { url: `${DOMAIN_NAME}/test`, method: "get" };
@@ -20,7 +48,12 @@
         const response = await axios(config);
         console.log(response["data"]);
       }
-      testConnect();
+      const buttonTag = document.querySelector("button");
+      buttonTag.addEventListener("click", (event) => {
+        getProducts();
+      });
+
+      //testConnect();
     </script>
   </body>
 </html>
