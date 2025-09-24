@@ -9,6 +9,18 @@
   <body>
     <script>
       //import axios from "axios";
+      //API 사용을 위한 기본주소(URL)
+      const DOMAIN_NAME = "https://dummyjson.com";
+      async function testConnect() {
+        //요청주소와 요청방법
+        const config = { url: `${DOMAIN_NAME}/test`, method: "get" };
+
+        //axios를 활용하여 요청(클라이언트 -> 서버)
+        //요청에 대한 응답을 변수 response에 저장
+        const response = await axios(config);
+        console.log(response["data"]);
+      }
+      testConnect();
     </script>
   </body>
 </html>
