@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" id="form">
+      <input type="password" name="password-1" />
+      <input type="password" name="password-2" />
+      <p id="password-alert"></p>
+      <input type="submit" />
+    </form>
+    <script>
+      const form = document.querySelector("#form");
+      const passAlert = document.querySelector("#password-alert");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const pass1 = form["elements"]["password-1"];
+        const pass2 = form["elements"]["password-2"];
+        if (pass1["value"] === pass2["value"])
+          passAlert.textContent = "비밀번호가 일치합니다";
+        else passAlert.textContent = "비밀번호가 일치하지 않습니다";
+      });
+    </script>
+  </body>
+</html>
