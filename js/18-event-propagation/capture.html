@@ -5,5 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div id="parent">
+      <div id="child">
+        <button id="button">버튼</button>
+      </div>
+    </div>
+    <script>
+      const parent = document.querySelector("#parent");
+      const child = document.querySelector("#child");
+      const button = document.querySelector("#button");
+
+      parent.addEventListener(
+        "click",
+        () => {
+          console.log("버튼클릭");
+        },
+        { capture: true }
+      );
+      child.addEventListener(
+        "click",
+        () => {
+          console.log("버튼클릭");
+        },
+        { capture: true }
+      );
+      button.addEventListener("click", () => {
+        console.log("버튼클릭");
+      });
+    </script>
+  </body>
 </html>
