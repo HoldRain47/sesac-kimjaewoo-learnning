@@ -5,5 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <button>버튼</button>
+    <script>
+      //값을 저장할 때에는 객체{키:값}형태로 저장해야 함
+      localStorage.setItem("키", "값");
+      const buttonTag = document.querySelector("button");
+      buttonTag.addEventListener("click", () => {
+        const data = localStorage.getItem("키");
+        alert(data);
+      });
+    </script>
+  </body>
 </html>

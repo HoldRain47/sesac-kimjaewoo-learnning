@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const BASE_URL = "https://dummyjson.com";
 async function addProduct() {
   const URL = "https://dummyijson.com/products/add";
 
