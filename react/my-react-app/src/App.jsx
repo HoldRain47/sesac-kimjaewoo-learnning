@@ -4,12 +4,12 @@ import React from "react";
 // import Header from "./components/JSX/Header";
 // import Footer from "./components/JSX/Footer";
 // 컴포넌트 불러오기
-import Parent from "./components/PropsChildren/Parent";
+import Container from "./components/Condition/Container";
 export default function App() {
   return (
     <div>
       {/* 컴포넌트 사용 */}
-      <Parent></Parent>
+      <Container></Container>
     </div>
   );
 }
