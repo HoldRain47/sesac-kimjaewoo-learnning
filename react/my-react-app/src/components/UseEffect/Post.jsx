@@ -1,9 +1,9 @@
 // src/components/DataFetching/Post.jsx
 
-export default function Post({ post }, key) {
+export default function Post({ post }) {
   return (
     <li key={post.id}>
-      No. {key}
+      No.
       {post.id} {post.title}
     </li>
   );
