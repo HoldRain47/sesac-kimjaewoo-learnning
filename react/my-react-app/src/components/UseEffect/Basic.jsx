@@ -1,30 +1,58 @@
-import React from "react";
+// useEffect 훅을 불러오기
 import { useEffect, useState } from "react";
+
 export default function Basic() {
-  const [number1, setNumber1] = useState(0);
+  const [number, setNumber] = useState(0);
   const [number2, setNumber2] = useState(0);
+  // useEffect 훅은 데이터를 생성하는 훅 X
   useEffect(() => {
-    console.log("의존성 배열 없음");
+    // API 요청
+    // axios 사용할 때 async 함수를 사용
   });
-  useEffect(() => {
-    console.log("의존성 배열 있음");
-  }, []);
-  useEffect(() => {
-    console.log("의존성 배열 1있음");
-  }, [number1]);
 
   useEffect(() => {
-    console.log("의존성 배열 2있음");
+    // 콜백 함수
+    // 화면 렌더링과 관련 없는 일을 한다
+    // API 요청하기, 타이머 시작하기 등등
+    console.log("의존성 배열이 없는 useEffect");
+  });
+
+  useEffect(() => {
+    console.log("의존성 배열이 있는데 빈 배열인 useEffect ");
+  }, []);
+
+  useEffect(() => {
+    console.log("의존성 배열에 number 상태가 저장");
+    // setNumber(number + 1);
+  }, [number]);
+
+  useEffect(() => {
+    console.log("의존성 배열에 number2 상태가 저장");
   }, [number2]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("1");
+    }, 1000);
+    return () => {
+      // 정리 함수
+      // 컴포넌트가 언마운트(죽을 때) 실행되는 함수
+      clearInterval(intervalId);
+    };
+  });
+
   return (
     <div>
+      {/* onClick 속성의 화살표함수에서 setNumber(number + 1) 실행 */}
       <button
         onClick={() => {
-          setNumber1(number1 + 1);
+          setNumber(number + 1);
         }}
       >
-        {number1}
+        {number}
       </button>
+
+      {/* onClick 속성의 화살표함수에서 setNumber2(number2 + 1) 실행 */}
       <button
         onClick={() => {
           setNumber2(number2 + 1);

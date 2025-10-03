@@ -9,19 +9,6 @@ export default function MovieDetail() {
 
   useEffect(() => {
     async function fetchData() {
-      const config = {
-        method: "GET",
-        url: `${BASE_URL}/movie/2`,
-        headers: {
-          "Content-Type": "application/json",
-          accept: "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        params: {
-          language: "ko-KR",
-        },
-      };
-
       const res = await axios(config);
       const data = res["data"];
       setMovies(data);
