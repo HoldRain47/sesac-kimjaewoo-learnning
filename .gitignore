@@ -1,3 +1,6 @@
 secret
 secret_folder/
 .DS_Store
+
+
+.env

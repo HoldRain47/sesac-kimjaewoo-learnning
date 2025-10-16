@@ -1,13 +1,13 @@
 // 액세스 토큰 상태 관리
 // 로그인, 회원가입, 로그아웃 같은 네트워크 비동기 처리
+//주석 지워질 예정
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // 로그인 요청을 보낼 인증 서버에 대한 정보
-const SUPABASE_URL = "https://jfsjmxtokcazzpykrxwp.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impmc2pteHRva2NhenpweWtyeHdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyMDE4NjksImV4cCI6MjA3NTc3Nzg2OX0.n-IAryEgUti5atr30MGszQ-fzStuW3BZDRMuaPPIefw";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // 회원가입 비동기 처리
 const signup = createAsyncThunk(
@@ -42,20 +42,60 @@ const signup = createAsyncThunk(
   }
 );
 
+// 로그인 비동기 처리 액션
 const login = createAsyncThunk(
-  "auth/login",
-  async (data, { rejectWtihValue }) => {
+  "auth/login", // 이름
+  // 비동기(async) 처리 함수
+  async (data, { rejectWithValue }) => {
+    // 로그인 로직 코드
     try {
-      config = {
+      const config = {
         url: `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
         method: "POST",
-        headers: { "Content-type": "application/json" },
-        apikry: SUPABASE_ANON_KEY,
+        headers: {
+          "Content-type": "application/json",
+          apikey: SUPABASE_ANON_KEY,
+        },
+        data: {
+          // 로그인 정보
+          email: data.email,
+          password: data.password,
+        },
       };
-      const response = await axios(cpmfig);
+      const response = await axios(config);
+
+      console.log(response.data); // (임시) 응답 구조를 출력
+
+      return response.data; // 성공했을 때 전달
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//로그아웃 비동기 처리
+const logout = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      // axios 요청 설정(config)
+      const config = {
+        url: `${SUPABASE_URL}/auth/v1/logout`,
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          apikey: SUPABASE_ANON_KEY,
+          // 사용자 인증 정보(토큰)를 함께 전송
+          // 로그아웃 : 누가 로그아웃을 하는지에 대한 정보(토큰)가 필요
+          Authorization: `Bearer ${getState().auth.token}`,
+        },
+      };
+      const response = await axios(config);
       return response.data;
     } catch (error) {
-      return rejectWtihValue(error.response.data);
+      console.error(error); // (임시) 디버깅용 코드
+      return rejectWithValue(error["response"]["data"]);
     }
   }
 );
@@ -91,7 +131,12 @@ const authSlice = createSlice({
         state.isSignup = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.token = action.payload["acces_token"];
+        // login 비동기 처리가 성공일 때 실행되는 콜백 함수
+        state.token = action.payload["access_token"];
+      })
+      .addCase(logout.fulfilled, (state) => {
+        //토큰 상태 초기화
+        state.token = null;
       })
       .addCase(signup.rejected, (state, action) => {
         // action.payload 어디서 왔는가?
@@ -104,4 +149,4 @@ const authSlice = createSlice({
 // 액션과 리듀서, 비동기 처리 액션 내보내기
 export const { resetIsSignup } = authSlice.actions;
 export default authSlice.reducer;
-export { signup, login };
+export { signup, login, logout };
